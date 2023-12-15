@@ -1,11 +1,11 @@
 "use server";
 
-import { kv } from "@vercel/kv";
+import r from "@/server/redis-server";
 import { revalidatePath } from "next/cache";
 
 export async function addCounter() {
   try {
-    await kv.incr("counter");
+    await r.incr("count");
     revalidatePath("/");
     return { message: "Incremented!" };
   } catch (error) {

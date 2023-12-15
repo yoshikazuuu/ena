@@ -1,8 +1,8 @@
-import { kv } from "@vercel/kv";
 import { AddCounter } from "./counter";
+import r from "@/server/redis-server";
 
 export default async function Home() {
-  let data = (await kv.get("counter")) as number;
+  let data = await r.get("count");
 
   return (
     <div className="flex w-screen h-screen flex-col justify-center items-center">
